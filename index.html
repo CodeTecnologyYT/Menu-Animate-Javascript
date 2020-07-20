@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <ul class="nav">
+        <li class="nav-item is-active" active-color="red">Start</li>
+        <li class="nav-item" active-color="blue">About</li>
+        <li class="nav-item" active-color="green">Contact</li>
+        <li class="nav-item" active-color="orange">Form</li>
+        <li class="nav-item" active-color="pink">Sign Up</li>
+        <li class="indicator"></li>
+    </ul>
+    <script>
+        const indicator = document.querySelector(".indicator");
+        const items = document.querySelectorAll(".nav-item");
+
+        function activeNav(elemt) {
+            items.forEach(function(item, index) {
+                item.removeAttribute("style");
+                item.classList.remove("is-active");
+            });
+            const width = elemt.offsetWidth;
+            const left = elemt.offsetLeft;
+            const color = elemt.getAttribute("active-color");
+            indicator.style.width = `${width}px`;
+            indicator.style.left = `${left}px`;
+            indicator.style.backgroundColor = color;
+            elemt.style.color = color;
+            elemt.classList.add("is-active");
+        }
+
+        items.forEach((item, index) => {
+            item.addEventListener("click", function(ev) {
+                activeNav(ev.target);
+            });
+            item.classList.contains("is-active") && activeNav(item);
+        });
+    </script>
+</body>
+
+</html>
